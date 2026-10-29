@@ -28,7 +28,9 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 
 - **Escludi sempre i dispositivi con trade name "PTS"** (Basic UDI-DI `8033178PTSCPB32`): non vanno caricati in Swissdamed.
 - Includi solo State = Registered.
-- Status "Not intended for the EU market": chiedi a Fabio se includerli (finché non lo conferma, generali in un file separato).
+- Status "Not intended for the EU market": **includili** (confermato da Fabio).
+- Package UDI-DI (GTIN 1 / GTIN 3): **includili**.
+- Dividi i file **per trade name** (un file per trade name; oltre 300 dispositivi, più file).
 - Un UDI-DI EUDAMED senza riga Excel → non generarlo; elencalo come ⚠️ "mancano i dati di dettaglio".
 - GTIN duplicato negli Excel (stesso GTIN su due REF) → usa la riga con il REF uguale a EUDAMED; se nessuna coincide, ⚠️ e non generarlo.
 
@@ -37,7 +39,7 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 - Fabbricante: Sorin Group Italia S.r.l., SRN `IT-MF-000027510` (dall'intestazione "CURRENT ACTOR" di EUDAMED: rileggilo sempre dal file, se cambia attore cambia l'SRN).
 - `basicudi:MFActorCode` = SRN del fabbricante; `m:sender/m:node/s:nodeActorCode` = SRN del fabbricante.
 - Nessun Authorised Representative UE (fabbricante UE).
-- Prima del caricamento verifica che in Swissdamed esista il mandato CH-REP per Sorin Group Italia (in Swissdamed si lavora con il mandato del fabbricante corretto).
+- Mandatario svizzero (CH-REP) già attivo in Swissdamed: CHRN dell'operatore `CHRN-AR-20001377`. Carica con il mandato di Sorin Group Italia.
 
 ## 4. Mappatura dei campi
 
@@ -156,9 +158,9 @@ Aggiungi qui ogni nuovo errore incontrato, con la regola per evitarlo.
 2. Escludi PTS (sezione 2) e applica il perimetro concordato.
 3. Unisci Excel (UDI-DI) e template BUDI/Certificate (Basic UDI-DI). Produci `Verifica_Swissdamed_<fabbricante>.xlsx` con i fogli "Master" e "Discrepanze" (REF, Basic UDI-DI, trade name, EMDN, status diversi; GTIN duplicati; UDI-DI senza dati Excel; Basic UDI-DI senza template; classi I sterili).
 4. Scarica in una cartella vuota `https://webgate.ec.europa.eu/eudamed-help/en/files/XSD%20schemas.zip` ed `EOs%20-%20XML%20samples.zip` (oppure chiedi a Fabio di caricarli se la rete li blocca). Aggiorna `m:Push version` secondo `service/Message/MessageType.xsd`.
-5. Genera gli XML (nuovi UUID, creationDateTime UTC attuale), massimo 300 dispositivi per file, raggruppati per famiglia o per Basic UDI-DI.
+5. Genera gli XML (nuovi UUID, creationDateTime UTC attuale), massimo 300 dispositivi per file, uno per trade name. Prima di generarli mostra a Fabio la tabella dei trade name (UDI-DI, On EU / Not EU, classe, Basic UDI-DI, stato pronto/bloccato e motivo).
 6. Valida ogni file: `etree.XMLSchema(etree.parse('xsd/service/Message.xsd')).validate(etree.parse(file))` e stampa `error_log`. Controlla anche le regole della sezione 7.
-7. Consegna con SendUserFile. Nome: `Swissdamed_MDR_<famiglia>_<n>.xml`.
+7. Consegna con SendUserFile. Nome: `Swissdamed_MDR_<TradeName>.xml` (con `_<n>` se diviso).
 
 ## 9. Come caricarlo
 
