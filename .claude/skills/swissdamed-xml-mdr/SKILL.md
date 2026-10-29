@@ -7,7 +7,9 @@ description: "Crea i file XML (EUDAMED DTX, servizio DEVICE/POST, MDRDeviceType)
 
 Usa questa skill quando Fabio chiede di "creare l'XML", "caricare con XML" o "esportare da EUDAMED a Swissdamed" dispositivi **MDR** (Regulation (EU) 2017/745, Basic UDI-DI GS1 tipo `8033178…`). Per i legacy MDD (EUDAMED DI `B-…`) usa `swissdamed-xml-legacy`; per la sola lista campi del form usa `swissdamed-registrazione`. Rispondi in italiano.
 
-Formato: EUDAMED DTX, servizio `DEVICE` / `POST`, payload `device:Device` di tipo `device:MDRDeviceType` (Basic UDI-DI + UDI-DI nello stesso oggetto, rapporto 1:1). Massimo 300 coppie per file: oltre, dividi in più file.
+Formato: EUDAMED DTX, servizio `DEVICE` / `POST`, payload `device:Device` di tipo `device:MDRDeviceType`.
+
+**Regola Swissdamed (guida ufficiale):** versioni XSD accettate 3.0.25, 3.0.28, 3.0.30, 3.0.32. **Ogni file XML contiene una sola Basic UDI-DI e almeno un UDI-DI assegnato a essa** → un file per Basic UDI-DI, con dentro tutti i suoi UDI-DI (una Basic UDI-DI può avere più trade name).
 
 ## 1. Fonti e priorità
 
@@ -30,7 +32,8 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 - Includi solo State = Registered.
 - Status "Not intended for the EU market": **includili** (confermato da Fabio).
 - Package UDI-DI (GTIN 1 / GTIN 3): **includili**.
-- Dividi i file **per trade name** (un file per trade name; oltre 300 dispositivi, più file).
+- Un file **per Basic UDI-DI** (regola Swissdamed). Il trade name serve solo per raggruppare e presentare: mostra la tabella per trade name e indica in quale file (Basic UDI-DI) finisce ciascuno.
+- Se una Basic UDI-DI ha UDI-DI bloccati, genera il file con quelli pronti ed elenca i mancanti (andranno aggiunti dopo, con un nuovo file della stessa Basic UDI-DI).
 - Un UDI-DI EUDAMED senza riga Excel → non generarlo; elencalo come ⚠️ "mancano i dati di dettaglio".
 - GTIN duplicato negli Excel (stesso GTIN su due REF) → usa la riga con il REF uguale a EUDAMED; se nessuna coincide, ⚠️ e non generarlo.
 
@@ -158,9 +161,9 @@ Aggiungi qui ogni nuovo errore incontrato, con la regola per evitarlo.
 2. Escludi PTS (sezione 2) e applica il perimetro concordato.
 3. Unisci Excel (UDI-DI) e template BUDI/Certificate (Basic UDI-DI). Produci `Verifica_Swissdamed_<fabbricante>.xlsx` con i fogli "Master" e "Discrepanze" (REF, Basic UDI-DI, trade name, EMDN, status diversi; GTIN duplicati; UDI-DI senza dati Excel; Basic UDI-DI senza template; classi I sterili).
 4. Scarica in una cartella vuota `https://webgate.ec.europa.eu/eudamed-help/en/files/XSD%20schemas.zip` ed `EOs%20-%20XML%20samples.zip` (oppure chiedi a Fabio di caricarli se la rete li blocca). Aggiorna `m:Push version` secondo `service/Message/MessageType.xsd`.
-5. Genera gli XML (nuovi UUID, creationDateTime UTC attuale), massimo 300 dispositivi per file, uno per trade name. Prima di generarli mostra a Fabio la tabella dei trade name (UDI-DI, On EU / Not EU, classe, Basic UDI-DI, stato pronto/bloccato e motivo).
+5. Genera gli XML (nuovi UUID, creationDateTime UTC attuale), uno per Basic UDI-DI. Prima di generarli mostra a Fabio la tabella dei trade name (UDI-DI, On EU / Not EU, classe, Basic UDI-DI, stato pronto/bloccato e motivo).
 6. Valida ogni file: `etree.XMLSchema(etree.parse('xsd/service/Message.xsd')).validate(etree.parse(file))` e stampa `error_log`. Controlla anche le regole della sezione 7.
-7. Consegna con SendUserFile. Nome: `Swissdamed_MDR_<TradeName>.xml` (con `_<n>` se diviso).
+7. Consegna con SendUserFile. Nome: `Swissdamed_MDR_<BasicUDI-DI>_<DeviceName>.xml`.
 
 ## 9. Come caricarlo
 
@@ -168,6 +171,6 @@ Swissdamed → UDI Devices → upload XML (profilo "UDI Editor" sul mandato del 
 
 ## 10. Output in chat
 
-- Una riga per file: nome file – numero dispositivi – Basic UDI-DI incluse – esito validazione XSD.
+- Una riga per file: nome file – Basic UDI-DI – trade name inclusi – numero UDI-DI – esito validazione XSD.
 - Elenco breve dei dispositivi esclusi o non generati, con il motivo (⚠️).
 - Nessun riepilogo dell'intero file.
