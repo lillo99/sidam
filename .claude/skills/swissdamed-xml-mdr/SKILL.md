@@ -48,7 +48,7 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 | riskClass | EUDAMED classe | Class I → `CLASS_I`, IIa → `CLASS_IIA`, IIb → `CLASS_IIB`, III → `CLASS_III`. Se il template BUDI dice IS/IM/IR e EUDAMED "Class I" → ⚠️ da verificare |
 | modelName / name | EUDAMED "Device Name" | Alla lettera (es. `OXYGENATORS`). Model solo se presente in EUDAMED |
 | MFActorCode | Sezione 3 | |
-| deviceCertificateLinks | Template BUDI "Certificate Number:" + template Certificate | Obbligatorio per IIa, IIb, III (e Is/Im/Ir). Tipo: "Full QMS" → tipo MDR Annex IX QMS (codice dall'XSD, vedi sezione 6). NB: ricava il numero ON dal certificato (TÜV SÜD = `0123`; per DEKRA verifica se è Certification GmbH `0124` o Certification B.V. `0344`) e chiedi conferma a Fabio la prima volta |
+| deviceCertificateLinks | Template BUDI "Certificate Number:" + template Certificate | Obbligatorio per IIa, IIb, III (e Is/Im/Ir). Tipo: "Full QMS" → MDR Annex IX QMS; "Technical Documentation Review" → MDR Annex IX valutazione della documentazione tecnica (codici dall'XSD). Classe III: servono entrambi i certificati (QMS + TD); se il template ne riporta uno solo → ⚠️. Numero ON: TÜV SÜD = `0123`; DEKRA (certificati `2245978…`) = `0344`. Revisione e scadenza dai template Certificate (`000-Certificate_Import_template*.xlsx`) |
 | type | Template BUDI "Is it a System or Procedure Pack…" | `Device` → `DEVICE` |
 | specialDevice | Template BUDI "Is it a Special Device Type:" | `0-N/A` → non inviare / valore "nessuno" secondo XSD |
 | humanTissuesCells, animalTissuesCells, humanProductCheck, medicinalProductCheck | Template BUDI | NO → `false` |
