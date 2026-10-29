@@ -70,7 +70,7 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 | referenceNumber | EUDAMED REF | Alla lettera (anche `/J`, `CN`, `J`) |
 | tradeNames | EUDAMED trade name | Lingua `EN`, togli spazi finali |
 | additionalDescription | Excel "<Lingua> Additional Product Description" | Solo se valorizzata |
-| website | Excel "URL for additional information" | Aggiungi `https://` se manca lo schema (es. `www.sorinmanuals.com` → `https://www.sorinmanuals.com`); ⚠️ se l'XSD rifiuta |
+| website | Excel "URL for additional information" | Alla lettera (es. `www.sorinmanuals.com`): il campo non richiede `https://` |
 | productionIdentifier | Excel "Device Control Aproach" | Lot Number / Serial Number / Manufacturing Date / Expiration date → un elemento per voce (codici dall'XSD) |
 | baseQuantity | Excel "Device Count" | Di solito 1 |
 | directMarking | Excel "Is Direct Mark DI Number the same as Device?" | Yes → direct marking DI = stesso UDI-DI (GS1); "Not Applicable"/No → non inviare |
@@ -83,67 +83,93 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 | storageHandlingConditions | Excel "Storage and Handling Conditions" (separati da `;`) + colonne limiti | Una `condition` per voce, nello stesso ordine; tabella codici in sezione 5 |
 | criticalWarnings | Excel "Critical Warning 1..5" (+ Value) | Tabella codici in sezione 5 |
 | clinicalSizes | Excel colonne "EUDAMED Diameter (Outer/Inner)", "EUDAMED Length", "EUDAMED Diameter", "EUDAMED Angle", "EUDAMED Shank Length" | Una clinical size per colonna valorizzata; valori con virgola decimale → punto; ⚠️ da confermare con il record EUDAMED |
-| substances CMR / endocrine | Excel "List of CMR Substances…", "List of Endocrine Substances…" | Formato `CAS_7440-48-4` → CAS `7440-48-4`; più valori separati da `;` |
+| substances CMR / endocrine | Excel "List of CMR Substances…", "List of Endocrine Substances…" | `CAS_7440-48-4` → CASCode `7440-48-4`; più valori separati da `;`. CMR richiede la categoria (sezione 5) |
 | packages | Excel GTIN 1 (scatola intermedia) e GTIN 3 (scatola esterna) + quantità | Solo se il GTIN è valorizzato; quantità da "Each inside at the intermediate/external Box" |
 | marketInfos | – | Non inviare per Swissdamed |
 | Market, GUDID, FDA, GMDN, Business Unit/Line, date paesi UE | – | Ignora |
 
-## 5. Codici di enumerazione già noti
+## 5. Codici di enumerazione (XSD 3.0.30, verificati)
 
-- Storage: `SHC001` Fragile, handle with care · `SHC002` Keep away from sunlight (anche "Keep out of sunlight") · `SHC005` Keep dry · `SHC006` Lower limit of temperature* · `SHC007` Upper limit of temperature* · `SHC008` Temperature limit* · `SHC009` Humidity limitation* · `SHC010` Atmospheric pressure limitation* · `SHC036` Do not freeze · `SHC044` This way up · `SHC046` Special storage (see IFU) · `SHC099` Other (* = descrizione obbligatoria in `commondi:comments`, senza lingua)
-- Critical warnings: `CW010` Consult instructions for use · `CW009` Do not re-use · `CW007` Do not use if package is damaged · `CW011` Caution · `CW008` Biological risks. **"Do not resterilize" e "Do not use past indicated date": cerca il codice nell'XSD** (`CommonDeviceType.xsd`) e aggiornalo qui dopo il primo caricamento riuscito.
-- Risk class, status, issuing entity: vedi tabella sezione 4.
-- Clinical size: `CST999` OTHER richiede `clinicalSizeDescription`; per diametro, lunghezza, angolo cerca i codici CST e le unità (mm, gradi) nell'XSD.
+- Risk class: `CLASS_I`, `CLASS_IIA`, `CLASS_IIB`, `CLASS_III`
+- Status: `ON_THE_MARKET`, `NOT_INTENDED_FOR_EU_MARKET`, `NO_LONGER_PLACED_ON_THE_MARKET`
+- Type of UDI-PI (`productionIdentifier`, lista separata da spazi): Lot Number → `BATCH_NUMBER`, Serial Number → `SERIALISATION_NUMBER`, Manufacturing Date → `MANUFACTURING_DATE`, Expiration date → `EXPIRATION_DATE`, Software → `SOFTWARE_IDENTIFICATION`
+- Certificati MDR: Full QMS → `MDR_QUALITY_MANAGEMENT_SYSTEM`, Technical Documentation Review → `MDR_TECHNICAL_DOCUMENTATION`; altri: `MDR_QUALITY_ASSURANCE`, `MDR_PRODUCT_VERIFICATION`, `MDR_TYPE_EXAMINATION`. `NBActorCode` = 4 cifre (TÜV SÜD `0123`, DEKRA `0344`)
+- Storage: `SHC001` Fragile, handle with care (anche "Fragile/Handle with care") · `SHC002` Keep away from sunlight (anche "Keep out of sunlight") · `SHC005` Keep dry · `SHC044` This way up · `SHC006`/`SHC007`/`SHC008`/`SHC009`/`SHC010` limiti temperatura/umidità/pressione (descrizione in `commondi:comments`) · `SHC036` Do not freeze · `SHC046` Special storage · `SHC099` Other
+- Critical warnings: `CW010` Consult instructions for use · `CW009` Do not re-use · `CW001` Do not resterilize · `CW007` Do not use if package is damaged · `CW032` Do not use past indicated date · `CW020` Do not sterilize · `CW011` Caution · `CW008` Biological risks
+- Clinical size type: `CST11` Diameter (outer) · `CST10` Diameter (inner) · `CST9` Diameter · `CST19` Length · `CST3` Angle · `CST999` OTHER (con `clinicalSizeDescription`). Unità: `MU50` mm · `MU105` gradi (°). Valore numerico → `xsi:type="commondi:ValueClinicalSizeType"` (value, valueUnit); testo (es. "Straight", "Fluted") → `commondi:TextClinicalSizeType` (text)
+- Sostanze: CMR → `xsi:type="udidi:CMRSubstanceType"` con `CASCode` (formato `7440-48-4`) e `type` `CMR_1A`/`CMR_1B` (cobalto 7440-48-4 = `CMR_1B`, ⚠️ conferma la categoria); endocrine → `xsi:type="udidi:EndocrineSubstanceType"` con `CASCode`
 
-Se serve un codice non in elenco, cercalo in `CommonDeviceType.xsd`, `UDIDIType.xsd`, `LinkType.xsd`, `CountryEnum.xsd` e nei file `*MDR*` dello zip XSD.
+Per altri codici: `data/Entity/Device/CommonDeviceType.xsd` (storage, warning, clinical size), `RegulationDevice/UDIDIType.xsd` (PI, unità, sostanze), `Links/LinkType.xsd` (certificati).
 
-## 6. Struttura XML
+## 6. Struttura XML (validata con XSD 3.0.30)
 
-L'ordine degli elementi è vincolante (XSD sequence). **Non c'è ancora un template MDR caricato con successo**: al primo utilizzo prendi la struttura dal campione MDR ufficiale (`EOs - XML samples.zip`, il sample DTX UDI con `xsi:type="device:MDRDeviceType"`) e validala con l'XSD. Dopo il primo caricamento riuscito in Swissdamed, sostituisci questa sezione con il template validato (come in `swissdamed-xml-legacy`).
+`MDRDeviceType` = esattamente **un** `MDRBasicUDI` + **un** `MDRUDIDIData`. Per rispettare la regola Swissdamed (una Basic UDI-DI per file) metti in `m:payload` un `device:Device` per ogni UDI-DI, ripetendo in ciascuno lo stesso blocco `MDRBasicUDI`. Busta, namespace e `sender` come in `swissdamed-xml-legacy` (senza `eudi`, `marketinfo`), con `s:nodeActorCode` del sender = SRN del fabbricante.
 
-Busta del messaggio (uguale al legacy, versione da verificare in `service/Message/MessageType.xsd`):
+Ordine vincolante (elementi opzionali tra parentesi quadre):
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<m:Push version="3.0.30"
-  xmlns:m="https://ec.europa.eu/tools/eudamed/dtx/servicemodel/Message/v1"
-  xmlns:s="https://ec.europa.eu/tools/eudamed/dtx/servicemodel/Service/v1"
-  xmlns:device="https://ec.europa.eu/tools/eudamed/dtx/datamodel/Entity/Device/v1"
-  xmlns:basicudi="https://ec.europa.eu/tools/eudamed/dtx/datamodel/Entity/Device/BasicUDI/v1"
-  xmlns:udidi="https://ec.europa.eu/tools/eudamed/dtx/datamodel/Entity/UDIDI/v1"
-  xmlns:commondi="https://ec.europa.eu/tools/eudamed/dtx/datamodel/Entity/Device/CommonDevice/v1"
-  xmlns:links="https://ec.europa.eu/tools/eudamed/dtx/datamodel/Entity/Links/v1"
-  xmlns:lsn="https://ec.europa.eu/tools/eudamed/dtx/datamodel/Entity/Common/LanguageSpecific/v1"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <!-- aggiungi i namespace MDR (es. mdrbasicudi, mdrudidi) presi dal sample ufficiale -->
-  <m:conversationID>{UUID}</m:conversationID>
-  <m:correlationID>{UUID}</m:correlationID>
-  <m:creationDateTime>{YYYY-MM-DDTHH:MM:SS.ffffffZ}</m:creationDateTime>
-  <m:messageID>{UUID}</m:messageID>
-  <m:recipient>
-    <m:node><s:nodeActorCode>EUDAMED</s:nodeActorCode><s:nodeID>eDelivery:EUDAMED</s:nodeID></m:node>
-    <m:service><s:serviceID>DEVICE</s:serviceID><s:serviceOperation>POST</s:serviceOperation></m:service>
-  </m:recipient>
-  <m:payload>
-    <!-- un device:Device per coppia Basic UDI-DI / UDI-DI -->
-    <device:Device xsi:type="device:MDRDeviceType">
-      <device:MDRBasicUDI> … </device:MDRBasicUDI>
-      <device:MDRUDIDIData> … </device:MDRUDIDIData>
-    </device:Device>
-  </m:payload>
-  <m:sender>
-    <m:node><s:nodeActorCode>IT-MF-000027510</s:nodeActorCode></m:node>
-    <m:service><s:serviceID>DEVICE</s:serviceID><s:serviceOperation>POST</s:serviceOperation></m:service>
-  </m:sender>
-</m:Push>
+<device:Device xsi:type="device:MDRDeviceType">
+  <device:MDRBasicUDI>
+    <basicudi:riskClass>CLASS_IIA</basicudi:riskClass>
+    <basicudi:modelName><commondi:name>{DEVICE NAME EUDAMED}</commondi:name></basicudi:modelName>
+    <basicudi:identifier><commondi:DICode>{BASIC UDI-DI}</commondi:DICode><commondi:issuingEntityCode>GS1</commondi:issuingEntityCode></basicudi:identifier>
+    <basicudi:animalTissuesCells>false</basicudi:animalTissuesCells>
+    <basicudi:humanTissuesCells>false</basicudi:humanTissuesCells>
+    <basicudi:MFActorCode>IT-MF-000027510</basicudi:MFActorCode>
+    [<basicudi:deviceCertificateLinks><links:deviceCertificateLink>
+        <links:certificateNumber>G15 057574 0075</links:certificateNumber>
+        <links:expiryDate>2030-08-27</links:expiryDate>
+        <links:NBActorCode>0123</links:NBActorCode>
+        <links:certificateRevisionNumber>0</links:certificateRevisionNumber>
+        <links:certificateType>MDR_QUALITY_MANAGEMENT_SYSTEM</links:certificateType>
+    </links:deviceCertificateLink></basicudi:deviceCertificateLinks>]   <!-- IIa/IIb/III; Classe III: un link per QMS e uno per TD -->
+    <basicudi:humanProductCheck>false</basicudi:humanProductCheck>
+    <basicudi:medicinalProductCheck>false</basicudi:medicinalProductCheck>
+    <basicudi:type>DEVICE</basicudi:type>
+    <commondi:active>false</commondi:active>
+    <commondi:administeringMedicine>false</commondi:administeringMedicine>
+    <commondi:implantable>false</commondi:implantable>
+    <commondi:measuringFunction>false</commondi:measuringFunction>
+    <commondi:reusable>false</commondi:reusable>
+  </device:MDRBasicUDI>
+  <device:MDRUDIDIData>
+    <udidi:identifier>{UDI-DI, GS1}</udidi:identifier>
+    <udidi:status><commondi:code>ON_THE_MARKET</commondi:code></udidi:status>
+    [<udidi:additionalDescription>…</udidi:additionalDescription>]
+    <udidi:basicUDIIdentifier>{BASIC UDI-DI, GS1}</udidi:basicUDIIdentifier>
+    <udidi:MDNCodes>C03010104</udidi:MDNCodes>
+    <udidi:productionIdentifier>BATCH_NUMBER MANUFACTURING_DATE EXPIRATION_DATE</udidi:productionIdentifier>
+    <udidi:referenceNumber>{REF}</udidi:referenceNumber>
+    <udidi:sterile>true</udidi:sterile>
+    <udidi:sterilization>false</udidi:sterilization>
+    <udidi:tradeNames><lsn:name><lsn:language>EN</lsn:language><lsn:textValue>{TRADE NAME}</lsn:textValue></lsn:name></udidi:tradeNames>
+    [<udidi:website>www.sorinmanuals.com</udidi:website>]
+    [<udidi:storageHandlingConditions><commondi:condition><commondi:storageHandlingConditionValue>SHC001</commondi:storageHandlingConditionValue></commondi:condition>…</udidi:storageHandlingConditions>]
+    [<udidi:packages>
+       <udidi:package>
+         <udidi:identifier>{GTIN scatola, GS1}</udidi:identifier>
+         <udidi:status><commondi:code>ON_THE_MARKET</commondi:code></udidi:status>
+         <udidi:child>{DI del livello inferiore: UDI-DI o scatola intermedia}</udidi:child>
+         <udidi:numberOfItems>6</udidi:numberOfItems>
+       </udidi:package>
+     </udidi:packages>]
+    [<udidi:criticalWarnings><commondi:warning><commondi:warningValue>CW010</commondi:warningValue></commondi:warning>…</udidi:criticalWarnings>]
+    <udidi:numberOfReuses>0</udidi:numberOfReuses>
+    [<udidi:deviceMarking><udidi:directMarkingDI>{UDI-DI, GS1}</udidi:directMarkingDI></udidi:deviceMarking>]
+    <udidi:baseQuantity>1</udidi:baseQuantity>
+    <udidi:latex>false</udidi:latex>
+    <udidi:reprocessed>false</udidi:reprocessed>
+    [<udidi:substances><udidi:substance xsi:type="udidi:CMRSubstanceType"><udidi:CASCode>7440-48-4</udidi:CASCode><udidi:type>CMR_1B</udidi:type></udidi:substance></udidi:substances>]
+    [<udidi:clinicalSizes><commondi:clinicalSize xsi:type="commondi:ValueClinicalSizeType"><commondi:clinicalSizeType>CST11</commondi:clinicalSizeType><commondi:value>7.0</commondi:value><commondi:valueUnit>MU50</commondi:valueUnit></commondi:clinicalSize></udidi:clinicalSizes>]
+  </device:MDRUDIDIData>
+</device:Device>
 ```
 
-I blocchi `udidi:` comuni (identifier, status, additionalDescription, basicUDIIdentifier, MDNCodes, referenceNumber, sterile, sterilization, tradeNames, website, storageHandlingConditions, criticalWarnings, numberOfReuses, latex, reprocessed, clinicalSizes) hanno la stessa forma del template in `swissdamed-xml-legacy`; la loro posizione nella sequenza MDR va presa dall'XSD.
+Imballi: GTIN 1 (scatola intermedia) → package con child = UDI-DI e numberOfItems = "Each inside at the intermediate Box"; GTIN 3 (scatola esterna) → package con child = GTIN 1 se esiste, altrimenti UDI-DI, e numberOfItems = "Each inside at the external Box". Status del package = status dell'UDI-DI.
 
-Differenze rispetto al legacy MDD:
-- Per MDR `productionIdentifier` e `baseQuantity` **sono richiesti** (l'errore UDI-1053 vale solo per i legacy).
-- `deviceCertificateLinks` obbligatorio per IIa/IIb/III (errore UDI-1096).
-- Niente `eudi:applicableLegislation`: la legislazione è data dal tipo `MDRDeviceType`.
+Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesignerActor`, `annexXVI*`, `specialDevice` (se "0-N/A").
+
+Lo stato "validato con XSD" non garantisce le regole di business Swissdamed: **al primo caricamento parti da un file con un solo UDI-DI** (es. VBT8), poi uno con più UDI-DI, e registra qui l'esito.
 
 ## 7. Errori Swissdamed già noti
 
