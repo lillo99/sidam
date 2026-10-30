@@ -171,6 +171,21 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
 
 **Esiti Swissdamed (30.10.2026, mandato CHRN-AR-20001377-MF-00001):** passati VBT8 (IIa, certificato TÜV, 1 package), MICRO 40 e KIDS D130 (più UDI-DI per Basic), BRACKETS (Classe I, direct marking, 10 Basic in un file). Tieni lo stato dei caricamenti in `Stato_caricamento_Swissdamed.xlsx` (una riga per Basic UDI-DI: file, stato, data, note).
 
+## 6b. Contesto: cannule Classe III e certificati DEKRA (TD01 / TD02 / TD03)
+
+- EUDAMED **non permette di associare due certificati TD diversi alla stessa Basic UDI-DI** (confermato dall'Helpdesk EUDAMED, settembre 2026). Le cannule Sorin Group Italia avevano Basic UDI-DI condivise fra `2245978TD01` (cannule "MIR") e `2245978TD02` (cannule "LNUS"/ARV).
+- Soluzione scelta (opzione 1, mail Luigi Vecchi → DEKRA del 01.09.2026): tenere i certificati separati e dare **nuove Basic UDI-DI "BIS"** alle famiglie del TD02. NoC DEKRA "NoC 14-26" (form 1993:10, firmato 13.09.2026): modifica amministrativa del TD02 (Annex IX, Classe III, Rule 7), rimozione di famiglie dismesse, correzione delle intended purpose. Organismo notificato DEKRA Certification B.V. `0344`.
+- Mappatura TD02 (vecchia → nuova Basic UDI-DI):
+  - `CANCARTESB` → `CANCARTBISM3` (EasyFlow Aortic 103-200, 103-300)
+  - `CANCPLARTP` → `CANCPLARBIS9F` (AR-11112/11114/11116, AR-11012/11014/11016/11018, AR-17012/17014)
+  - `CANCPLCSTX` → `CANCPLCSBISAC` (CP-21004…CP-22008, con palloncino); CP-11010…CP-12014 cancellati
+  - `CANCVENOUX` → `CANCVENOBISWB` (single stage RV-400xx / RV-410xx), `CANCVENOBISDL` (dual/tri stage RDS-, RTS-), `CANCVENFUD` (RAP femoral 200-100/200-150); LRD- e RV-40012/40014/40038/41012/41014/41038 cancellati, aggiunto RV-40536
+  - `CANCVENTV9` → `CANCVENBISPT` (vent catheters VT-)
+  - Invariate nel TD02: `CANCARTFSD`, `CANCPLANTF`, `CANCPLREUG`, `CANCPLVCUQ` (solo VC-11100/VC-11110; CA-40030 cancellato)
+- Le vecchie Basic UDI-DI restano al TD01 (template BUDI "Classe III - MIR").
+- Conseguenza per Swissdamed: **le cannule entrano in Swissdamed solo dopo la riemissione del TD02 e la registrazione in EUDAMED** (scadenza EUDAMED citata: novembre). Fino ad allora non generare XML per le cannule, anche se i file MIR-TEM "Cannule" sono pronti.
+- Classe III: in Swissdamed servono il certificato TD (TD01 o TD02, a seconda della Basic UDI-DI) e il certificato QMS `2245978CE01`.
+
 ## 7. Errori Swissdamed già noti
 
 | Errore | Regola |
