@@ -192,6 +192,13 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
   - `CANCVENTV9` → `CANCVENBISPT` (vent catheters VT-)
   - Invariate nel TD02: `CANCARTFSD`, `CANCPLANTF`, `CANCPLREUG`, `CANCPLVCUQ` (solo VC-11100/VC-11110; CA-40030 cancellato)
 - Le vecchie Basic UDI-DI restano al TD01 (template BUDI "Classe III - MIR").
+- **Decisioni (riunione, autunno 2026)**: tutte le cannule e gli accessori si registrano in EUDAMED come **MDR con fabbricante Sorin Group Italia (Mirandola, IT-MF-000027510)**, anche quelli prodotti ad Arvada (USA, senza SRN; produzione in trasferimento) e anche le famiglie ancora MDD (RDS, accessori): circa un mese di disallineamento formale accettato.
+  - Certificati: `2245978CE01` (QMS, copre tutte le famiglie; unico certificato per gli accessori Classe IIa); `TD01` cannule Mirandola; `TD02` cannule Arvada (nuove Basic UDI-DI "BIS"; "unchanged" = Basic UDI-DI attuale); `TD03` famiglia certificata dopo (Protek Duo+, scadenza 04.02.2031).
+  - Il TD02 si associa anche prima della riemissione: le registrazioni EUDAMED restano "submitted" finché DEKRA non carica il certificato.
+  - Campi EUDAMED cannule: Device name = codice modello; trade name generico ("cannule"); intended purpose aggiornato secondo NoC/DoC; uniformità con le registrazioni TD01 (Francesca).
+  - Accessori: Classe IIa, solo `2245978CE01`, dati dalla DoC in draft.
+  - Controllo finale entro fine anno: campione di 50–60 codici EUDAMED.
+  - Swissdamed: dopo EUDAMED vanno caricate cannule TD01, TD02 (+TD03) e accessori; i PTS MDR restano fuori (attività interna).
 - Conseguenza per Swissdamed: **le cannule entrano in Swissdamed solo dopo la riemissione del TD02 e la registrazione in EUDAMED** (scadenza EUDAMED citata: novembre). Fino ad allora non generare XML per le cannule, anche se i file MIR-TEM "Cannule" sono pronti.
 - Classe III: in Swissdamed carica **entrambi** i certificati dichiarati nella DoC: TD (TD01/TD02/TD03 secondo la Basic UDI-DI) e QMS `2245978CE01` (rev. 03, scadenza 01.06.2028). EUDAMED può mostrare solo il TD: la fonte dei certificati è la DoC. Caso PROTEK DUO+ (`8033178CANCVENOVENOCE`, TD03 rev. 00 + CE01 rev. 03, scadenza 01.06.2028): caricato senza errori il 30.10.2026.
 - ⚠️ Nei template Certificate le scadenze sono celle data con formato `m/d/yyyy` (americano): a video "1/6/2028" sembra 1 giugno ma il valore salvato per CE01 è **6 gennaio 2028**. Leggi sempre il valore della cella e confrontalo con DoC o certificato; per CE01 vale 01.06.2028 (DoC).
