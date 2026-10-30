@@ -73,7 +73,7 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 | website | Excel "URL for additional information" | Alla lettera (es. `www.sorinmanuals.com`): il campo non richiede `https://` |
 | productionIdentifier | Excel "Device Control Aproach" | Lot Number / Serial Number / Manufacturing Date / Expiration date → un elemento per voce (codici dall'XSD) |
 | baseQuantity | Excel "Device Count" | Di solito 1 |
-| directMarking | Excel "Is Direct Mark DI Number the same as Device?" | Yes → direct marking DI = stesso UDI-DI (GS1); "Not Applicable"/No → non inviare |
+| deviceMarking (direct marking) | EUDAMED "Is the device directly marked?" | Solo se EUDAMED = Yes. **Non usare** la colonna Excel "Is Direct Mark DI Number the same as Device?" da sola: vale "Yes" per i BRACKETS ma in EUDAMED sono "No" (errore scoperto il 31.10.2026, corretto con un re-upload). Dall'Excel serve "Direct Part Marking (DPM)?" = Yes |
 | unitOfUse | Excel "Unit of Use DI" | Valorizzato con un DI reale → inviarlo; `1` o vuoto → non inviare (⚠️ se dubbio) |
 | sterile | Excel "Is Device Packaged Sterile?" | `yes - sterile` → `true`, `no - not sterile` → `false` |
 | sterilization | Excel "Does it need to be sterlized before use?" | `None Needed` → `false` |
