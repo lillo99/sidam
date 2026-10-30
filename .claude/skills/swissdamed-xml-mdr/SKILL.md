@@ -188,7 +188,7 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
   - `CANCARTESB` → `CANCARTBISM3` (EasyFlow Aortic 103-200, 103-300)
   - `CANCPLARTP` → `CANCPLARBIS9F` (AR-11112/11114/11116, AR-11012/11014/11016/11018, AR-17012/17014)
   - `CANCPLCSTX` → `CANCPLCSBISAC` (CP-21004…CP-22008, con palloncino); CP-11010…CP-12014 cancellati
-  - `CANCVENOUX` → `CANCVENOBISWB` (single stage RV-400xx / RV-410xx), `CANCVENOBISDL` (dual/tri stage RDS-, RTS-), `CANCVENFUD` (RAP femoral 200-100/200-150); LRD- e RV-40012/40014/40038/41012/41014/41038 cancellati, aggiunto RV-40536
+  - `CANCVENOUX` → `CANCVENOBISDL` (straight RV-40016…RV-40036 + RV-40536, dual stage RDS-, tri stage RTS-), `CANCVENOBISWB` (right angle RV-41016…RV-41036), `CANCVENFUD` (RAP femoral 200-100/200-150); LRD- e RV-40012/40014/40038/41012/41014/41038 cancellati. **La NoC è la fonte corretta** (confermato da Fabio): l'Excel ARV che mette RV-400xx sotto BISWB è sbagliato. Trascrizione completa modello per modello: `NoC_14-26_TD02_Basic_UDI-DI.xlsx`
   - `CANCVENTV9` → `CANCVENBISPT` (vent catheters VT-)
   - Invariate nel TD02: `CANCARTFSD`, `CANCPLANTF`, `CANCPLREUG`, `CANCPLVCUQ` (solo VC-11100/VC-11110; CA-40030 cancellato)
 - Le vecchie Basic UDI-DI restano al TD01 (template BUDI "Classe III - MIR").
