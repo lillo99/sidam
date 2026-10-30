@@ -193,7 +193,8 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
   - Invariate nel TD02: `CANCARTFSD`, `CANCPLANTF`, `CANCPLREUG`, `CANCPLVCUQ` (solo VC-11100/VC-11110; CA-40030 cancellato)
 - Le vecchie Basic UDI-DI restano al TD01 (template BUDI "Classe III - MIR").
 - Conseguenza per Swissdamed: **le cannule entrano in Swissdamed solo dopo la riemissione del TD02 e la registrazione in EUDAMED** (scadenza EUDAMED citata: novembre). Fino ad allora non generare XML per le cannule, anche se i file MIR-TEM "Cannule" sono pronti.
-- Classe III: in Swissdamed servono il certificato TD (TD01 o TD02, a seconda della Basic UDI-DI) e il certificato QMS `2245978CE01`.
+- Classe III: in Swissdamed carica **entrambi** i certificati dichiarati nella DoC: TD (TD01/TD02/TD03 secondo la Basic UDI-DI) e QMS `2245978CE01` (rev. 03, scadenza 01.06.2028). EUDAMED può mostrare solo il TD: la fonte dei certificati è la DoC. Caso PROTEK DUO+ (`8033178CANCVENOVENOCE`, TD03 rev. 00 + CE01 rev. 03, scadenza 01.06.2028): caricato senza errori il 30.10.2026.
+- ⚠️ Il template `000-Certificate_Import_template.xlsx` riporta per CE01 la scadenza 2028-01-06: è giorno/mese invertiti, la data giusta è 01.06.2028 (DoC).
 
 ## 7. Errori Swissdamed già noti
 
