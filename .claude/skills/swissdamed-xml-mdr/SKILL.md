@@ -37,7 +37,7 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 
 ## 2. Esclusioni e perimetro
 
-- **Escludi sempre i dispositivi con trade name "PTS"** (Basic UDI-DI `8033178PTSCPB32`): non vanno caricati in Swissdamed.
+- **Escludi sempre i dispositivi con trade name "PTS"** (Basic UDI-DI MDR `8033178PTSCPB32`): non vanno caricati in Swissdamed. In Swissdamed i PTS ci sono già come **legacy MDD solo per la Svizzera**: 31 EUDAMED DI `B-08033178…` (DIDECO / PERFUSION TUBING SYSTEMS) sul mandato `CHRN-AR-20001377-MF-00001`, gestiti con `swissdamed-xml-legacy`.
 - Includi solo State = Registered.
 - Status "Not intended for the EU market": **includili** (confermato da Fabio).
 - Package UDI-DI (GTIN 1 / GTIN 3): **includili**.
@@ -194,7 +194,7 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
 - Le vecchie Basic UDI-DI restano al TD01 (template BUDI "Classe III - MIR").
 - Conseguenza per Swissdamed: **le cannule entrano in Swissdamed solo dopo la riemissione del TD02 e la registrazione in EUDAMED** (scadenza EUDAMED citata: novembre). Fino ad allora non generare XML per le cannule, anche se i file MIR-TEM "Cannule" sono pronti.
 - Classe III: in Swissdamed carica **entrambi** i certificati dichiarati nella DoC: TD (TD01/TD02/TD03 secondo la Basic UDI-DI) e QMS `2245978CE01` (rev. 03, scadenza 01.06.2028). EUDAMED può mostrare solo il TD: la fonte dei certificati è la DoC. Caso PROTEK DUO+ (`8033178CANCVENOVENOCE`, TD03 rev. 00 + CE01 rev. 03, scadenza 01.06.2028): caricato senza errori il 30.10.2026.
-- ⚠️ Il template `000-Certificate_Import_template.xlsx` riporta per CE01 la scadenza 2028-01-06: è giorno/mese invertiti, la data giusta è 01.06.2028 (DoC).
+- ⚠️ Nei template Certificate le scadenze sono celle data con formato `m/d/yyyy` (americano): a video "1/6/2028" sembra 1 giugno ma il valore salvato per CE01 è **6 gennaio 2028**. Leggi sempre il valore della cella e confrontalo con DoC o certificato; per CE01 vale 01.06.2028 (DoC).
 
 ## 7. Errori Swissdamed già noti
 
