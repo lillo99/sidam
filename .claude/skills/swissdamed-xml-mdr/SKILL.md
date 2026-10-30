@@ -191,7 +191,7 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
 | Errore | Regola |
 |---|---|
 | UDI-1096 | Classi IIa, IIb, III senza `deviceCertificateLinks` |
-| UDI-1017 (directMarkingDi) | La marcatura diretta **non è aggiornabile** in Swissdamed: un upload che la toglie o la cambia viene rifiutato. Va giusta al primo caricamento (vedi regola deviceMarking); per correggere bisogna fare discard dell'UDI-DI in Swissdamed e ricaricarlo (caso BRACKETS, 30.10.2026) |
+| UDI-1017 (directMarkingDi) | La marcatura diretta **non è aggiornabile** in Swissdamed: un upload che la toglie o la cambia viene rifiutato. Va giusta al primo caricamento (vedi regola deviceMarking); per correggere: discard degli UDI-DI in Swissdamed e nuovo upload. **Verificato il 30.10.2026**: i 26 UDI-DI BRACKETS scartati sono stati ricaricati senza errori con lo stesso codice |
 | UDI-1070 | Sostanza CMR (e, per sicurezza, endocrine) senza nome: con CAS va aggiunto `<udidi:names><lsn:name><lsn:language>ANY</lsn:language><lsn:textValue>Cobalt</lsn:textValue></lsn:name></udidi:names>` prima di `CASCode` (una sola voce, lingua `ANY`). Nomi: 7440-48-4 Cobalt; 117-81-7 Bis(2-ethylhexyl) phthalate (DEHP); 85-68-7 Benzyl butyl phthalate (BBP) |
 | UDI-1098 | `type` = SYSTEM / PROCEDURE_PACK senza `additionalDescription` |
 | UDI-1017 / UDI-1019 | UDI-DI già presente in Swissdamed con campi non aggiornabili diversi (REF, clinical sizes, certificati): controllare il record esistente (bozza → cancellare; registrato → allineare) |
