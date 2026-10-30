@@ -26,6 +26,15 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 
 **Se EUDAMED (Bulk Download) fornisce l'XML dei dispositivi registrati**, usa quello come fonte principale per tutti i campi: è già nello stesso modello dati.
 
+### Fonte consigliata: export automatico da EUDAMED (senza diritti di amministratore)
+
+1. Metti in `scripts/eudamed_export.js` la lista degli UDI-DI da scaricare.
+2. Fabio apre `https://ec.europa.eu/tools/eudamed/#/screen/search-device` in Chrome o Edge, F12 → Console, incolla lo script (se richiesto, prima `allow pasting`) e preme Invio. Lo script usa le API pubbliche (`/tools/eudamed/api/devices/udiDiData?primaryDi=…`, `/udiDiData/{uuid}`, `/basicUdiData/udiDiData/{uuid}`) e salva `eudamed_export_<data>.json` nei Download. Testato il 30.10.2026: 24/24 dispositivi, 0 errori.
+3. Converti con `python3 -I scripts/json2xml.py export.json out.xml IT-MF-000027510 [--only BASIC,…] [--cert "BASIC=NUM;TIPO;NB;REV;SCADENZA"]` e valida con l'XSD.
+   - Prende tutto da EUDAMED: flag Basic, certificati (`deviceCertificateInfoList`), stato, EMDN, PI, sterile, riusi, storage, warnings, scatole (`containedItem`), sostanze CMR/endocrine con nome, CAS ed EC, dimensioni cliniche (spesso con precisione "text", es. "6,35 mm", "Straight", "30°": vanno riportate come `TextClinicalSizeType`, non convertite in numeri), marcatura diretta.
+   - Per la Classe IIa/IIb EUDAMED spesso non mostra certificati (li collega l'organismo notificato): aggiungili con `--cert`.
+   - Gli Excel MIR-TEM restano solo come controllo: in più casi erano diversi da EUDAMED (marcatura diretta, dimensioni cliniche, sostanze endocrine, GTIN duplicati).
+
 ## 2. Esclusioni e perimetro
 
 - **Escludi sempre i dispositivi con trade name "PTS"** (Basic UDI-DI `8033178PTSCPB32`): non vanno caricati in Swissdamed.
