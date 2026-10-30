@@ -159,7 +159,7 @@ Ordine vincolante (elementi opzionali tra parentesi quadre):
     <udidi:baseQuantity>1</udidi:baseQuantity>
     <udidi:latex>false</udidi:latex>
     <udidi:reprocessed>false</udidi:reprocessed>
-    [<udidi:substances><udidi:substance xsi:type="udidi:CMRSubstanceType"><udidi:CASCode>7440-48-4</udidi:CASCode><udidi:type>CMR_1B</udidi:type></udidi:substance></udidi:substances>]
+    [<udidi:substances><udidi:substance xsi:type="udidi:CMRSubstanceType"><udidi:names><lsn:name><lsn:language>ANY</lsn:language><lsn:textValue>Cobalt</lsn:textValue></lsn:name></udidi:names><udidi:CASCode>7440-48-4</udidi:CASCode><udidi:type>CMR_1B</udidi:type></udidi:substance></udidi:substances>]
     [<udidi:clinicalSizes><commondi:clinicalSize xsi:type="commondi:ValueClinicalSizeType"><commondi:clinicalSizeType>CST11</commondi:clinicalSizeType><commondi:value>7.0</commondi:value><commondi:valueUnit>MU50</commondi:valueUnit></commondi:clinicalSize></udidi:clinicalSizes>]
   </device:MDRUDIDIData>
 </device:Device>
@@ -176,6 +176,7 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
 | Errore | Regola |
 |---|---|
 | UDI-1096 | Classi IIa, IIb, III senza `deviceCertificateLinks` |
+| UDI-1070 | Sostanza CMR (e, per sicurezza, endocrine) senza nome: con CAS va aggiunto `<udidi:names><lsn:name><lsn:language>ANY</lsn:language><lsn:textValue>Cobalt</lsn:textValue></lsn:name></udidi:names>` prima di `CASCode` (una sola voce, lingua `ANY`). Nomi: 7440-48-4 Cobalt; 117-81-7 Bis(2-ethylhexyl) phthalate (DEHP); 85-68-7 Benzyl butyl phthalate (BBP) |
 | UDI-1098 | `type` = SYSTEM / PROCEDURE_PACK senza `additionalDescription` |
 | UDI-1017 / UDI-1019 | UDI-DI già presente in Swissdamed con campi non aggiornabili diversi (REF, clinical sizes, certificati): controllare il record esistente (bozza → cancellare; registrato → allineare) |
 
