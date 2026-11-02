@@ -198,6 +198,11 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
   - Campi EUDAMED cannule: Device name = codice modello; trade name generico ("cannule"); intended purpose aggiornato secondo NoC/DoC; uniformità con le registrazioni TD01 (Francesca).
   - Accessori: Classe IIa, solo `2245978CE01`, dati dalla DoC in draft.
   - Controllo finale entro fine anno: campione di 50–60 codici EUDAMED.
+  - **Riferimenti certificati per il caricamento EUDAMED** (PDF forniti da Fabio, 02.11.2026):
+    - `2245978TD02`: EU Technical Documentation Assessment, Annex IX cap. II e III, DEKRA 0344, rev. 1 del 31/10/2024 (primo rilascio 28/10/2024), scadenza 01/10/2029 → `MDR_TECHNICAL_DOCUMENTATION`. Riporta ancora le Basic UDI-DI pre-NoC.
+    - `2245978CE01`: EU Quality Management System, Annex IX cap. I e III, DEKRA 0344, rev. 1 del 28/10/2024 nel PDF (la DoC Protek Duo+ del 07/2026 cita rev. 03: verificare la revisione attuale), scadenza 01/06/2028 → `MDR_QUALITY_MANAGEMENT_SYSTEM`.
+  - **Device description EUDAMED** delle cannule = "Device Name" del certificato TD02 per gruppo di modelli (es. "Arterial Cannulae, EasyFlow Aortic", "Venous Cannulae, Venous return (Straight, wire reinforced)"). Tabella completa in `REF_TD02_completo.xlsx`.
+  - GTIN, UDI-DI ed EMDN delle cannule TD02: fonte **MIS-001513** (Rev 24); i MIR-TEM Cannule_ARV non sono attendibili (GTIN scalati).
   - Ripartizione: TD01 (cannule Mirandola) → Luca, che le carica su Byrd dopo aver corretto il file di Giulia; TD02, TD03, SSA (accessori) e RCS → Fabio.
   - Dimensioni cliniche delle cannule: obbligatorie perché indicate in etichetta. Struttura cambiata con una modifica in corso sulle etichette: prima diametro esterno, diametro interno e due lunghezze; ora un solo diametro e la lunghezza effettiva. La fonte è l'Excel R&D, non le colonne "EUDAMED Diameter/Length" dei MIR-TEM, che possono essere superate. In Swissdamed le clinical size non sono aggiornabili: caricare le cannule solo dopo la versione EUDAMED definitiva.
   - Swissdamed: dopo EUDAMED vanno caricate cannule TD01, TD02 (+TD03) e accessori; i PTS MDR restano fuori (attività interna).
