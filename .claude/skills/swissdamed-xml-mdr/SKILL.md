@@ -241,3 +241,10 @@ Swissdamed → UDI Devices → upload XML (profilo "UDI Editor" sul mandato del 
 - Una riga per file: nome file – Basic UDI-DI – trade name inclusi – numero UDI-DI – esito validazione XSD.
 - Elenco breve dei dispositivi esclusi o non generati, con il motivo (⚠️).
 - Nessun riepilogo dell'intero file.
+
+### Fonte ufficiale sostanze / dimensioni / trade name (cannule e accessori Arvada, suction)
+`CMRSVHC_EUDAMED_ARVADA_Filled_1.xlsx` (fogli SUCTION DEVICE, CANNULE ACCESSORIES ARV, CANNULE ARV) è la fonte UFFICIALE per:
+CMR, interferenti endocrini, sostanze medicinali, Brand (Trade Name), Tip OD (diametro esterno), Connector OD, Tip angle, Length, colonna "Ph/Out WW".
+Supera MIR-TEM per sostanze, diametro e trade name. Convenzione (come già in EUDAMED per i suction): ftalati in "endocrine", BPA in "CMR".
+Mappa: DEHP/DOP → Bis(2-ethylhexyl) phthalate 117-81-7 / 204-211-0; DnHP → Di-n-hexyl phthalate 84-75-3 / 201-559-5;
+BBP → Benzyl butyl phthalate 85-68-7 / 201-622-7; BPA → Bisphenol A 80-05-7 / 201-245-8; "NAPTHA" (103-200/210/300/310) da chiarire.
