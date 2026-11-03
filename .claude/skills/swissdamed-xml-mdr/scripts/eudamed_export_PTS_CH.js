@@ -7,6 +7,7 @@
 // Su EUDAMED secure: PRIMA aprire a mano il dettaglio di un dispositivo qualsiasi,
 // così lo script vede quali indirizzi API usa la pagina e li riusa.
 (async () => {
+  if (!/europa\.eu$/.test(location.hostname)) { alert("Apri prima la pagina EUDAMED (ec.europa.eu/tools/eudamed oppure webgate.ec.europa.eu/eudamed/secure) e lancia lo script da quella scheda."); return; }
   const PTS = [ // [UDI-DI, REF] dal file Swissdamed del 29.10
     ["08033178314596", "AB1184"],
     ["08033178354974", "AB2627"],
