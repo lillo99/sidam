@@ -15,7 +15,7 @@ BNAME = {'8033178CANCARTBISM3': 'Arterial Cannulae, EasyFlow Aortic', '8033178CA
          '8033178CANCPLCSBISAC': 'Cardioplegia Cannulae Coronary Artery Perfusion, Cannula with balloon',
          '8033178CANCPLREUG': 'Cardioplegia Cannulae, Retrograde', '8033178CANCPLVCUQ': 'Cardioplegia Cannulae Vessel, Vessel Cannulae',
          '8033178CANCVENBISPT': 'Vent Catheters', '8033178CANCVENFUD': 'Venous Cannulae, Remote Access Perfusion (RAP) femoral',
-         '8033178CANCVENOBISDL': 'Venous Cannulae, Venous return', '8033178CANCVENOBISWB': 'Venous Cannulae, Venous return (Right angle, wire reinforced)'}
+         '8033178CANCVENOBISDL': 'Venous Cannulae, Venous return', '8033178CANVENOBISWB': 'Venous Cannulae, Venous return (Right angle, wire reinforced)'}
 CERTS = [('2245978TD02', '2029-10-01', '1', 'MDR_TECHNICAL_DOCUMENTATION'), ('2245978CE01', '2028-06-01', '1', 'MDR_QUALITY_MANAGEMENT_SYSTEM')]
 CTRY = {'Austria': 'AT', 'Belgium': 'BE', 'Bulgaria': 'BG', 'Croatia': 'HR', 'Cyprus': 'CY', 'Denmark': 'DK', 'Czech Republic': 'CZ', 'Estonia': 'EE',
         'Finland': 'FI', 'France': 'FR', 'Germany': 'DE', 'Greece': 'EL', 'Hungary': 'HU', 'Iceland': 'IS', 'Ireland': 'IE', 'Italy': 'IT', 'Latvia': 'LV',
