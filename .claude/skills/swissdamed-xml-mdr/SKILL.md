@@ -219,6 +219,7 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
 | UDI-1070 | Sostanza CMR (e, per sicurezza, endocrine) senza nome: con CAS va aggiunto `<udidi:names><lsn:name><lsn:language>ANY</lsn:language><lsn:textValue>Cobalt</lsn:textValue></lsn:name></udidi:names>` prima di `CASCode` (una sola voce, lingua `ANY`). Nomi: 7440-48-4 Cobalt; 117-81-7 Bis(2-ethylhexyl) phthalate (DEHP); 85-68-7 Benzyl butyl phthalate (BBP) |
 | UDI-1098 | `type` = SYSTEM / PROCEDURE_PACK senza `additionalDescription` |
 | UDI-1017 / UDI-1019 | UDI-DI già presente in Swissdamed con campi non aggiornabili diversi (REF, clinical sizes, certificati): controllare il record esistente (bozza → cancellare; registrato → allineare) |
+| Clinical size o certificato sbagliati su UDI-DI già registrato | Non modificabili da interfaccia. **Verificato il 23.11.2026 (Protek Duo+ 5150-4629EU, 10.33 → 9.67 mm; CE01 rev. 3 → 1)**: discard dell'UDI-DI in EUDAMED e ricarica XML `UDI_DI`/`POST` (opzione "UDI-DI for existing Basic UDI-DI") con lo stesso GTIN; poi discard + ricarica in Swissdamed. 1 Fr = 1/3 mm (29 Fr = 9.67 mm, 31 Fr = 10.33 mm) |
 
 Aggiungi qui ogni nuovo errore incontrato, con la regola per evitarlo.
 
