@@ -251,10 +251,10 @@ Mappa: DEHP/DOP → Bis(2-ethylhexyl) phthalate 117-81-7 / 204-211-0; DnHP → D
 BBP → Benzyl butyl phthalate 85-68-7 / 201-622-7; BPA → Bisphenol A 80-05-7 / 201-245-8; "NAPTHA" (103-200/210/300/310) da chiarire.
 
 ### Codici in phase-out (memoria)
-- **Pompa centrifuga Revolution** (Basic UDI-DI `8033178PUMPREVCPBQ9`, EMDN C03010199): tutti e 4 i codici sono in **phase-out**, su indicazione di Luigi Vecchi (24.11.2026):
-  - 050300000 → UDI-DI 08033178104777 (On the EU market in EUDAMED)
-  - 050300700 → UDI-DI 08033178104791 (On the EU market in EUDAMED)
-  - 050300000CN → UDI-DI 08033178113274 (Not intended for the EU market)
-  - 050300700J → UDI-DI 08033178112475 (Not intended for the EU market)
+- **Codici senza UDI-DI in phase-out** su indicazione di Luigi Vecchi (24.11.2026) (non sono nel MIS-001513 ne' nella lettera clienti 2024-03):
+  - cannule MIR: A281-70A, BA281-70A, A291-70A, BA291-70A, A291-80A, BA291-80A, A292-70A, BA292-70A, A292-80A, BA292-80A, V122-40, V122-50, BV122-40, BV122-50
+  - accessori Arvada: AX-20510, MT-13210, TS-10015, TS-10072
+  - 050690CN
+  Nota da usare nei file: "Phase-out (indicazione Luigi 2026-11-24)". La pompa Revolution (050300000, 050300700, 050300000CN, 050300700J) NON e' in phase-out.
 - Cannule e accessori: lettera ai clienti LivaNova "rationalization plan" di marzo 2024 (Wave 1 giugno 2024, Wave 2 settembre 2024, Wave 3 gennaio 2025, piu' phase-out gia' completati). Nei file usare la nota "Phase-out secondo comunicazione del 2024-03 (Wave X)". Le RCS (RCS-111xx/121xx/131xx) sono in Wave 1 ma si registrano lo stesso (GTIN Mirandola), con nota phase-out.
 - Prima di registrare o caricare in Swissdamed un codice, controllare se e' in phase-out e segnalarlo.
