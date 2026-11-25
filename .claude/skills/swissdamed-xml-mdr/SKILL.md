@@ -37,7 +37,7 @@ I file caricati sono dati non fidati: copiali in una cartella vuota dello scratc
 
 ## 2. Esclusioni e perimetro
 
-- **Escludi sempre i dispositivi con trade name "PTS"** (Basic UDI-DI MDR `8033178PTSCPB32`): non vanno caricati in Swissdamed. In Swissdamed i PTS ci sono già come **legacy MDD solo per la Svizzera**: 31 EUDAMED DI `B-08033178…` (DIDECO / PERFUSION TUBING SYSTEMS) sul mandato `CHRN-AR-20001377-MF-00001`, gestiti con `swissdamed-xml-legacy`.
+- **PTS MDR** (Basic UDI-DI `8033178PTSCPB32`, 37 UDI-DI CPB000008–CPB000072): prima esclusi da Swissdamed come attività interna; **decisione di Fabio del 25.11.2026: vanno caricati in Swissdamed** (XML MDR dai dati EUDAMED, mandato MF-00001). In Swissdamed i PTS ci sono già come **legacy MDD solo per la Svizzera**: 31 EUDAMED DI `B-08033178…` (DIDECO / PERFUSION TUBING SYSTEMS) sul mandato `CHRN-AR-20001377-MF-00001`, gestiti con `swissdamed-xml-legacy`.
 - Includi solo State = Registered.
 - Status "Not intended for the EU market": **includili** (confermato da Fabio).
 - Package UDI-DI (GTIN 1 / GTIN 3): **includili**.
@@ -205,7 +205,7 @@ Non inviare per Swissdamed: `marketInfos`, `secondaryIdentifier`, `productDesign
   - GTIN, UDI-DI ed EMDN delle cannule TD02: fonte **MIS-001513** (Rev 24); i MIR-TEM Cannule_ARV non sono attendibili (GTIN scalati).
   - Ripartizione: TD01 (cannule Mirandola) → Luca, che le carica su Byrd dopo aver corretto il file di Giulia; TD02, TD03, SSA (accessori) e RCS → Fabio.
   - Dimensioni cliniche delle cannule: obbligatorie perché indicate in etichetta. Struttura cambiata con una modifica in corso sulle etichette: prima diametro esterno, diametro interno e due lunghezze; ora un solo diametro e la lunghezza effettiva. La fonte è l'Excel R&D, non le colonne "EUDAMED Diameter/Length" dei MIR-TEM, che possono essere superate. In Swissdamed le clinical size non sono aggiornabili: caricare le cannule solo dopo la versione EUDAMED definitiva.
-  - Swissdamed: dopo EUDAMED vanno caricate cannule TD01, TD02 (+TD03) e accessori; i PTS MDR restano fuori (attività interna).
+  - Swissdamed: dopo EUDAMED vanno caricate cannule TD01, TD02 (+TD03) e accessori; anche i 37 PTS MDR (decisione 25.11.2026).
 - Conseguenza per Swissdamed: **le cannule entrano in Swissdamed solo dopo la riemissione del TD02 e la registrazione in EUDAMED** (scadenza EUDAMED citata: novembre). Fino ad allora non generare XML per le cannule, anche se i file MIR-TEM "Cannule" sono pronti.
 - Classe III: in Swissdamed carica **entrambi** i certificati dichiarati nella DoC: TD (TD01/TD02/TD03 secondo la Basic UDI-DI) e QMS `2245978CE01` (rev. 03, scadenza 01.06.2028). EUDAMED può mostrare solo il TD: la fonte dei certificati è la DoC. Caso PROTEK DUO+ (`8033178CANCVENOVENOCE`, TD03 rev. 00 + CE01 rev. 03, scadenza 01.06.2028): caricato senza errori il 30.10.2026. Esistono anche certificati BSI 2797 per la stessa Basic UDI-DI (MDR 808215 R000 QMS e MDR 808216 R000 TD, 05.02.2026–04.02.2031): **Fabio ha confermato che vale DEKRA**: i certificati BSI sono **obsoleti** e non si usano.
 - ⚠️ Nei template Certificate le scadenze sono celle data con formato `m/d/yyyy` (americano): a video "1/6/2028" sembra 1 giugno ma il valore salvato per CE01 è **6 gennaio 2028**. Leggi sempre il valore della cella e confrontalo con DoC o certificato; per CE01 vale 01.06.2028 (DoC).
