@@ -257,5 +257,5 @@ BBP → Benzyl butyl phthalate 85-68-7 / 201-622-7; BPA → Bisphenol A 80-05-7 
   - accessori Arvada: AX-20510, MT-13210, TS-10015, TS-10072
   - 050690CN
   Nota da usare nei file: "Phase-out (indicazione Luigi 2026-11-24)". La pompa Revolution (050300000, 050300700, 050300000CN, 050300700J) NON e' in phase-out.
-- Cannule e accessori: lettera ai clienti LivaNova "rationalization plan" di marzo 2024 (Wave 1 giugno 2024, Wave 2 settembre 2024, Wave 3 gennaio 2025, piu' phase-out gia' completati). Nei file usare la nota "Phase-out secondo comunicazione del 2024-03 (Wave X)". Le RCS (RCS-111xx/121xx/131xx) sono in Wave 1 ma si registrano lo stesso (GTIN Mirandola), con nota phase-out.
+- Cannule e accessori: lettera ai clienti LivaNova "rationalization plan" di marzo 2024 (Wave 1 giugno 2024, Wave 2 settembre 2024, Wave 3 gennaio 2025, piu' phase-out gia' completati). Nei file usare la nota "Phase-out secondo comunicazione del 2024-03 (Wave X)". Le RCS (RCS-111xx/121xx/131xx) compaiono in Wave 1 ma **NON sono in phase-out** (nota Fabio 27.11.2026: entrano nella Dichiarazione di Conformità): si registrano senza nota phase-out (GTIN Mirandola).
 - Prima di registrare o caricare in Swissdamed un codice, controllare se e' in phase-out e segnalarlo.
